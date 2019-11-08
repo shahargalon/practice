@@ -11,6 +11,6 @@ class Company():
 
 max = Company("max", "2000k", 1400)
 
-testing = 300
+
 
 Company.show(max)           

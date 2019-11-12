@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+################################################
+# learning class and basic object oriented 
+# this is class company and some method of class
+# date : 31.10.19
+#################################################
+
 class Company():
     def __init__(self, name, income, employes_amount):
         self.name = name

@@ -26,7 +26,7 @@ stages {
             docker build  -t 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:${GITCOMMIT} .
             #two push one for master tag other is git commit ID
             docker push 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:${GITCOMMIT}
-            docker tag 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:${GITCOMMIT} 123456789101.dkr.ecr.eu-west-1.amazonaws.com/nginx:latest
+            docker tag 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:${GITCOMMIT} 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:latest
             docker push 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:latest
          '''.stripIndent())
 

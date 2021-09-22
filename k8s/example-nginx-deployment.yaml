@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: nginx-example
-        image: 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:latest
+        image: 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:GITCOMMIT
         imagePullPolicy: Always
         ports:
         - containerPort: 80

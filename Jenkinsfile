@@ -9,7 +9,7 @@ pipeline {
 
 stages {
 
-    stage('docker build and push to ecr') {
+    stage('CI - docker build and push to ecr') {
       
       steps {
 
@@ -36,7 +36,7 @@ stages {
 
       }
     }
-    stage('CD into k8s') {
+    stage('CD -  into k8s') {
       
       steps {
 
@@ -45,7 +45,7 @@ stages {
          #!/bin/bash
 
             ####sed command
-            sed -i s,IMAGE_VAR,232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:$GITCOMMIT k8s/example-nginx-deployment.yaml
+            sed -i 's/IMAGE_VAR/232452606882.dkr.ecr.us-east-1.amazonaws.com\/nginx-example:$GITCOMMIT/' k8s/example-nginx-deployment.yaml
             kubectl apply -f k8s/example-nginx-deployment.yaml
          '''.stripIndent())
       }

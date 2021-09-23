@@ -50,7 +50,7 @@ metadata:
   namespace: default  
 spec:
   rules:
-  - host: www.exapmle-test.com
+  - host: abaea0556401741d6b018aff7ea2c770-451278384.us-east-1.elb.amazonaws.com
     http:
       paths:
       - path: /nginx

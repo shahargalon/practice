@@ -9,11 +9,11 @@ spec:
   replicas: {{.Values.applicationManifest.replicas}}
   selector:
     matchLabels: 
-      app: nginx-example
+      app: {{.Values.applicationManifest.app}}
   template:
     metadata:
       labels:
-        app: nginx-example
+        app: {{.Values.applicationManifest.app}}
     spec:
       containers:
       - name: {{.Values.applicationManifest.name}}
@@ -30,7 +30,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata: 
-  name: nginx-example-service
+  name: {{.Values.applicationManifest.name}}
   namespace: {{.Values.applicationManifest.namespace}}
 spec:
   selector:
@@ -44,10 +44,10 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx-example-insgress
+  name: {{.Values.applicationManifest.name}}
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
-  namespace: default  
+  namespace: {{.Values.applicationManifest.namespace}}  
 spec:
   rules:
   - host: www.exapmle-test.com
@@ -57,7 +57,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: nginx-example-service
+            name: {{.Values.applicationManifest.name}}
             port: 
               number: 80
         path: /nginx(/|$)(.*)    

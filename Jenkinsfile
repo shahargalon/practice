@@ -41,7 +41,7 @@ stages {
        sh(label: 'push the container to k8s', script:
          '''
          #!/bin/bash  
-            helm upgrade --set applicationManifest.image=232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:${GITCOMMIT} example-nginx ./helm
+            helm upgrade --set applicationManifest.image=232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:${GITCOMMIT} example-enginx ./helm
          '''.stripIndent())
       }
     }

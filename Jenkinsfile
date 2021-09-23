@@ -29,8 +29,6 @@ stages {
             docker push 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:${GITCOMMIT}
             docker tag 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:${GITCOMMIT} 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:latest
             docker push 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:latest
-
-            kubectl apply -f k8s/example-nginx-deployment.yaml
          '''.stripIndent())
 
 
@@ -42,11 +40,8 @@ stages {
 
        sh(label: 'push the container to k8s', script:
          '''
-         #!/bin/bash
-
-            ####sed command
-            sed -i 's/IMAGE_VAR/232452606882.dkr.ecr.us-east-1.amazonaws.com\/nginx-example:$GITCOMMIT/' k8s/example-nginx-deployment.yaml
-            kubectl apply -f k8s/example-nginx-deployment.yaml
+         #!/bin/bash  
+            helm install --set applicationManifest.image=docker tag 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:${GITCOMMIT} example-nginx .helm/
          '''.stripIndent())
       }
     }

@@ -1,0 +1,7 @@
+---
+applicationManifest:
+  name: nginx-example
+  replicas: 1
+  image: 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:latest
+  app: enginx-example
+  namespace: default

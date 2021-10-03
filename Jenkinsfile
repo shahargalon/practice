@@ -14,7 +14,7 @@ stages {
     stage('CI - docker build and push to ecr') {
       
       steps {
-         ECR(AWS_REGION:"us-east-1", GITCOMMIT:$GITCOMMIT, IMAGE:$IMAGE)
+         ECR()
       }
     }
     stage('CD -  into k8s') {

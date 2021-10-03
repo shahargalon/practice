@@ -3,7 +3,8 @@ pipeline {
      environment {
         AWS_REGION  = 'us-east-1'
         GITCOMMIT="${env.GIT_COMMIT.take(7)}"
-
+        IMAGE="232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example"
+        APPNAME=example-enginx
 
     }
 
@@ -24,13 +25,13 @@ stages {
             # Enable Debug and Exit immediately 
             set -xe
             echo $GITCOMMIT
-            docker build  -t 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:${GITCOMMIT} .
+            docker build  -t ${IMAGE}:${GITCOMMIT} .
             #two push one for master tag other is git commit ID
-            docker push 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:${GITCOMMIT}
-            docker tag 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:${GITCOMMIT} 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:latest
-            docker push 232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:latest
+            docker push ${IMAGE}:${GITCOMMIT}
+            docker tag ${IMAGE}:${GITCOMMIT} ${IMAGE}:latest
+            docker push ${IMAGE}:latest
          '''.stripIndent())
-
+ 
 
       }
     }
@@ -43,8 +44,8 @@ stages {
          #!/bin/bash
               
             helm status example-enginx && 
-            helm upgrade --set applicationManifest.image=232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:${GITCOMMIT} example-enginx ./helm || 
-            helm install --set applicationManifest.image=232452606882.dkr.ecr.us-east-1.amazonaws.com/nginx-example:${GITCOMMIT} example-enginx ./helm
+            helm upgrade --set applicationManifest.image=${IMAGE}:${GITCOMMIT} ${APPNAME} ./helm || 
+            helm install --set applicationManifest.image=${IMAGE}:${GITCOMMIT} ${APPNAME} ./helm
          '''.stripIndent())
       }
     }

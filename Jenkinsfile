@@ -22,14 +22,10 @@ stages {
     stage('CD -  into k8s') {
       
       steps {
-
-       sh(label: 'push the container to k8s', script:
-         '''
-         #!/bin/bash
-              
-            helm upgrade -i --set applicationManifest.image=${IMAGE}:${GITCOMMIT} ${APPNAME} ./helm
-         '''.stripIndent())
+        script{
+         HELM()
+        }
       }
     }
-}
+  }
 }

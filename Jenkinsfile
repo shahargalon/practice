@@ -1,4 +1,6 @@
-@Library("shared-library") _
+library("shared-library")
+ECRlogin_PUSH()
+
 pipeline {
   agent any
      environment {
@@ -15,7 +17,7 @@ stages {
       
       steps {
         script{
-         load("ECR").ECRlogin_PUSH(AWS_REGION:$AWS_REGION,GITCOMMIT:$GITCOMMIT,IMAGE:$IMAGE)
+         ECRlogin_PUSH(AWS_REGION:$AWS_REGION,GITCOMMIT:$GITCOMMIT,IMAGE:$IMAGE)
       }
       }
     }

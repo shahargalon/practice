@@ -16,7 +16,7 @@ stages {
       
       steps {
         
-         ECR(AWS_REGION:$AWS_REGION,GITCOMMIT:$GITCOMMIT,IMAGE:$IMAGE)
+         ECR(AWS_REGION:AWS_REGION,GITCOMMIT:GITCOMMIT,IMAGE:IMAGE)
       }
     }
     stage('CD -  into k8s') {

@@ -14,7 +14,7 @@ stages {
     stage('CI - docker build and push to ecr') {
       
       steps {
-         ECR(AWS_REGION:AWS_REGION,GITCOMMIT:GITCOMMIT,IMAGE:IMAGE)
+         load("ECR.groovy").ECRlogin_PUSH(AWS_REGION:AWS_REGION,GITCOMMIT:GITCOMMIT,IMAGE:IMAGE)
       }
     }
     stage('CD -  into k8s') {
@@ -26,7 +26,7 @@ stages {
          #!/bin/bash
               
             helm status example-enginx && 
-            helm upgrade --set applicationManifest.image=${IMAGE}:${GITCOMMIT} ${APPNAME} ./helm || 
+            helm upgrade   !!!!!!     CHANGE TO -i !!!!!!   --set applicationManifest.image=${IMAGE}:${GITCOMMIT} ${APPNAME} ./helm || 
             helm install --set applicationManifest.image=${IMAGE}:${GITCOMMIT} ${APPNAME} ./helm
          '''.stripIndent())
       }

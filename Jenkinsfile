@@ -19,6 +19,7 @@ stages {
         }
       }
     }
+    
     stage('CD -  into k8s') {
       
       steps {

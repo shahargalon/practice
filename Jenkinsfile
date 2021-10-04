@@ -14,7 +14,9 @@ stages {
     stage('CI - docker build and push to ecr') {
       
       steps {
+        script{
          load("ECR.groovy").ECRlogin_PUSH(AWS_REGION:$AWS_REGION,GITCOMMIT:$GITCOMMIT,IMAGE:$IMAGE)
+      }
       }
     }
     stage('CD -  into k8s') {

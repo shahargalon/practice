@@ -15,7 +15,7 @@ stages {
       
       steps {
         script{
-         ECR(AWS_REGION:"${env.AWS_REGION}",GITCOMMIT:"${env.GITCOMMIT}",IMAGE:"${env.IMAGE}")
+         ECR(AWS_REGION:AWS_REGION,GITCOMMIT:GITCOMMIT,IMAGE:IMAGE)
         }
       }
     }

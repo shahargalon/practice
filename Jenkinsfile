@@ -15,7 +15,7 @@ stages {
       
       steps {
         script{
-         load("ECR.groovy").ECRlogin_PUSH(AWS_REGION:$AWS_REGION,GITCOMMIT:$GITCOMMIT,IMAGE:$IMAGE)
+         load("ECR").ECRlogin_PUSH(AWS_REGION:$AWS_REGION,GITCOMMIT:$GITCOMMIT,IMAGE:$IMAGE)
       }
       }
     }

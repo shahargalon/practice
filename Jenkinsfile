@@ -1,5 +1,4 @@
-library("shared-library")
-ECRlogin_PUSH()
+@Library("shared-library") _
 
 pipeline {
   agent any
@@ -16,9 +15,8 @@ stages {
     stage('CI - docker build and push to ecr') {
       
       steps {
-        script{
-         ECRlogin_PUSH(AWS_REGION:$AWS_REGION,GITCOMMIT:$GITCOMMIT,IMAGE:$IMAGE)
-      }
+        
+         ECR(AWS_REGION:$AWS_REGION,GITCOMMIT:$GITCOMMIT,IMAGE:$IMAGE)
       }
     }
     stage('CD -  into k8s') {
@@ -29,9 +27,7 @@ stages {
          '''
          #!/bin/bash
               
-            helm status example-enginx && 
-            helm upgrade   !!!!!!     CHANGE TO -i !!!!!!   --set applicationManifest.image=${IMAGE}:${GITCOMMIT} ${APPNAME} ./helm || 
-            helm install --set applicationManifest.image=${IMAGE}:${GITCOMMIT} ${APPNAME} ./helm
+            helm upgrade -i --set applicationManifest.image=${IMAGE}:${GITCOMMIT} ${APPNAME} ./helm
          '''.stripIndent())
       }
     }
